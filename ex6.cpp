@@ -9,27 +9,16 @@ int solutions = 0;
 bool isSafe(int row, int col) {
     for (int i = 0; i < row; i++) {
         if (board[i][col] == 1) return false; 
-        if (col - (row - i) >= 0 && board[i][col - (row - i)] == 1) return false; 
-        if (col + (row - i) < N && board[i][col + (row - i)] == 1) return false; 
+       if (col - (row - i) >= 0 && col - (row-i)<N&& board[i][col - (row - i)] == 1) return false; 
+        if (col + (row - i) < N && col+(row-i)>=0 board[i][col + (row - i)] == 1) return false; 
     }
     return true;
 }
 
-void printBoard() {
-    cout << "Solution " << solutions << ":\n";
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            cout << (board[i][j] ? "Q " : ". ");
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
 
 void solveNQueens(int row) {
     if (row == N) { 
         solutions++;
-        printBoard(); 
         return;
     }
     for (int col = 0; col < N; col++) {
