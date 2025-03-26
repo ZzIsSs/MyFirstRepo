@@ -15,5 +15,7 @@ void BinaryString( int n, string s){
 
 int main(){
 	string ans;
-	BinaryString(3,ans);
+	int n; cin>>n;
+	BinaryString(n,ans);
+	return 0;
 }
