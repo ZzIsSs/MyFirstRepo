@@ -10,7 +10,7 @@ bool isSafe(int row, int col) {
     for (int i = 0; i < row; i++) {
         if (board[i][col] == 1) return false; 
        if (col - (row - i) >= 0 && col - (row-i)<N&& board[i][col - (row - i)] == 1) return false; 
-        if (col + (row - i) < N && col+(row-i)>=0 board[i][col + (row - i)] == 1) return false; 
+        if (col + (row - i) < N && col+(row-i)>=0 && board[i][col + (row - i)] == 1) return false; 
     }
     return true;
 }
