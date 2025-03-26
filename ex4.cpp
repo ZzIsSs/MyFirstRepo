@@ -13,6 +13,7 @@ void HanoiTower(int n,char from_rod,char to_rod,char aux_rod){
 
 
 int main(){
-	HanoiTower(3,'A','B','C');
+	int n; cin>>n;
+	HanoiTower(n,'A','B','C');
 	return 0;
 }
