@@ -9,6 +9,7 @@ int Fac(int n){
 }
 
 int main(){
-	cout<<Fac(2);
+	int n; cin>>n; 
+	cout<<Fac(n);
 	return 0;
 }
