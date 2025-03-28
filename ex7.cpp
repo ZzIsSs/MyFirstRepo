@@ -1,8 +1,5 @@
 #include<iostream>
-#include<time.h>
-#include<stdlib.h> 
- 
- 
+
 using namespace std;
 
 void Merge(int* a,int left,int mid,int right){
@@ -34,10 +31,14 @@ void MergeSort(int* a,int left,int right){
 	
 }
 
-int* CreateArray(int n){
-	int* ans=new int[n];
-	for(int i=0;i<n;i++){
-		ans[i]=rand()%20-10;
+int* CreateArray(int& n) {
+	cout << "Nhap so luong phan tu ";
+	cin >> n;
+	cout << endl;
+	int* ans = new int[n];
+	for (int i = 0; i < n; i++) {
+		cout << "Hay nhap phan tu thu " << i << endl;
+		cin >> ans[i];
 	}return ans;
 }
 
@@ -92,12 +93,10 @@ int** solve(int* nums,int numsSize,int &returnSize){
 
 
 int main(){
-	srand((unsigned)time(0));
-	int n=rand()%11+15;
+	int n;
 	int* a=CreateArray(n);
 	PrintArray(a,n);
 	int** res=solve(a,n,n);
 	if(res) PrintMatrix(res,n,3);
-	
-	
+	return 0;
 }
