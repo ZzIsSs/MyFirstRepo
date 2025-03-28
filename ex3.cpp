@@ -11,31 +11,15 @@ int searchProMax(int* nums, int numsSize) {
 	}return nums[right]>nums[mid]? nums[mid]: nums[right];
 }
 
-void Rotate(int* ans,int n) {
-	int times; cout << "ban muon xoay bao nhieu "; cin >> times;
-	times %= n;
-	int* temp = new int[times];
-	for (int i = 0; i < times; i++) {
-		temp[i] = ans[i];
-	}for (int i = 0; i < n - times; i++) {
-		ans[i] = ans[i + times];
-	}int count = 0;
-	for (int i = n - times; i < n; i++) {
-		ans[i] = temp[count++];
-	}delete[] temp;
-}
-
 int* CreateArray(int& n) {
 	cout << "Nhap so luong phan tu ";
 	cin >> n;
 	cout << endl;
 	int* ans = new int[n];
 	for (int i = 0; i < n; i++) {
-		ans[i] = i;
-	}Rotate(ans, n);
-	for (int i = 0; i < n; i++) {
-		cout << ans[i] << " ";
-	}cout << endl;
+		cout<<"Hay nhap phan tu "<<i<<" ";
+		cin>>ans[i];
+	}
 	return ans;
 }
 
