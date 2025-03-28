@@ -24,9 +24,21 @@ int MinLen(int* nums, int n, int key) {
 	return ans+1;
 }
 
+int* CreateArray(int& n) {
+	cout << "Nhap so luong phan tu ";
+	cin >> n;
+	cout << endl;
+	int* ans = new int[n];
+	for (int i = 0; i < n; i++) {
+		cout<<"Hay nhap gia tri thu "<<i<<" ";
+		cin>>ans[i];
+	}
+	return ans;
+}
+
 int main(){
-	int a[]={7,10,3,4,5,9,11,23,2};
-	int n=sizeof(a)/sizeof(a[0]);
+	int n;
+	int* a=CreateArray(n);
 	int key;cout<<"nhap tong muon tim ";cin>>key;
 	
 	cout<<"chuoi so co do dai be nhat la "<<MinLen(a,n,key);
