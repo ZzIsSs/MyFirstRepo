@@ -4,11 +4,11 @@ using namespace std;
 
 int searchProMax(int* nums, int numsSize) {
 	int left=0,right=numsSize-1,mid=left+(right-left)/2;
-	while(mid!=left&&mid!=right){
+	while(left<right){
 		if(nums[mid]>nums[right]) left=mid+1;
 		else right=mid;
 		mid=left+(right-left)/2;
-	}return nums[right]>nums[mid]? nums[mid]: nums[right];
+	}return nums[right];
 }
 
 int* CreateArray(int& n) {
@@ -17,7 +17,7 @@ int* CreateArray(int& n) {
 	cout << endl;
 	int* ans = new int[n];
 	for (int i = 0; i < n; i++) {
-		cout<<"Hay nhap phan tu "<<i<<" ";
+		cout<<"Hay nhap gia tri thu "<<i<<" ";
 		cin>>ans[i];
 	}
 	return ans;
