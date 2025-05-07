@@ -1,107 +1,90 @@
 #include<iostream>
 #include<fstream>
+#include<cmath>
 #include<string>
-
-
+#include<vector>
+#include<sstream>
 
 using namespace std;
 
+const int m = pow(10, 9) + 9;
+const int p = 31;
+const int last = 20;
 
-
-struct Node {
-	int val;
-	Node* next;
+struct Company {
+	string name;
+	string profit_tax;
+	string address;
 };
 
-struct Stack {
-	Node* head;
-	int size;
+struct HashTable {
+	Company cty;
+	HashTable* next;
 };
 
-Stack* InitStack() {
-	Stack* ans = new Stack;
-	if (ans != nullptr)
-	{
-		ans->size = 0;
-		ans->head = nullptr;
+vector<Company> readCompanyList(string file_name) {
+	fstream doc(file_name);
+	string line;
+	Company temp;
+	vector<Company> ans;
+	while (getline(doc, line)) {
+		stringstream ss(line);
+		getline(ss, temp.name, '|');
+		getline(ss, temp.profit_tax, '|');
+		getline(ss, temp.address, '|');
+		ans.push_back(temp);
 	}
-	else
-	{
-		cout << "Out of memory " << endl;
+	doc.close();
+	return ans;
+}
+
+int min(int a, int b) {
+	return a > b ? b : a;
+}
+
+long long key(string company_name) {
+	long long ans = 0;
+	int n = company_name.size();
+	int times = min(n, last);
+	for (int i = 0; i < times; i++) {
+		ans += ( company_name[n - i - 1] * (int)pow(p, i) % m);
+		ans %= m;
 	}
 	return ans;
 }
 
-void push(Stack* s, int val) {
-	Node* p = new Node;
+bool add(HashTable** hash, Company cty) {
+	int Key = key(cty.name)%m;
+	HashTable* p = new HashTable();
 	if (p == nullptr) {
-		cout << "out of memory" << endl;
-		return;
+		return 0;
 	}
-	p->next = s->head;
-	p->val = val;
-	s->head = p;
-	s->size++;
+	p->cty = cty;
+	p->next = hash[Key];
+	hash[Key] = p;
+	return 1;
 }
 
-int top(Stack* s) {
-	if (s == nullptr || s->size == 0) {
-		return -1;
+HashTable* createHashTable(vector<Company> list_company) {
+	HashTable** hash = new HashTable * [m];
+	for (int i = 0; i < m; i++) {
+		hash[i] = nullptr;
 	}
-	return s->head->val;
+
 }
 
-void pop(Stack* s) {
-	if (s == nullptr || s->size == 0) {
-		return;
+void Print(ostream& os,Company company) {
+	os << company.name << endl << company.profit_tax << endl << company.address << endl << endl;
+}
+
+void Print(vector<Company> list) {
+	for (int i = 0; i < list.size(); i++) {
+		Print(cout,list[i]);
 	}
-	Node* p = s->head;
-	s->head = p->next;
-	delete p;
-	s->size--;
-}
-
-int size(Stack* s) {
-	if (s == nullptr) return 0;
-	return s->size;
-}
-
-bool isEmpty(Stack* s) {
-	if (s == nullptr) return true;
-	return s->size == 0;
-}
-
-void print(Stack* s) {
-	if (s == nullptr) return;
-	Node* p = s->head;
-	while (p) {
-		cout << p->val << " ";
-		p = p->next;
-	}cout << endl;
-}
-
-void clear(Stack* s) {
-	if (s == nullptr) return;
-	while (s->size) {
-		pop(s);
-	}s = nullptr;
 }
 
 int main() {
-	//ifstream doc("intput.txt");
-	//ofstream ghi("output.txt");
-	//if (!doc.is_open() || !ghi.is_open()) return -1;
-	Stack* s = InitStack();
-	push(s, 10);
-	push(s, 120);
-	push(s, 103);
-	push(s, 110);
-	push(s, 103);
-	push(s, 140);
-	push(s, 150);
-	push(s, 107);
-	print(s);
-	clear(s);
-	if(isEmpty(s)) cout<<"stack is empty bro !!"<<endl;
-	return 0;
+	string file = "Text.txt";
+	vector<Company> ans = readCompanyList(file);
+	Print(ans);
 }
